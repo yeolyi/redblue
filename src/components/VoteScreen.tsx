@@ -93,8 +93,8 @@ export default function VoteScreen({
         </div>
 
         <div className="grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
-          <ChoiceCard choice="blue" />
           <ChoiceCard choice="red" />
+          <ChoiceCard choice="blue" />
         </div>
 
         <div className="mt-10 flex items-center gap-4 text-xs text-white/70">

@@ -12,7 +12,6 @@ const PROVIDERS: {
   id: Provider;
   label: string;
   className: string;
-  iconClassName?: string;
 }[] = [
   {
     id: "kakao",
@@ -62,10 +61,10 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
             5월 18일 오후 6시 결과 공개
           </p>
           <h1 className="text-balance text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-            파랑 vs 빨강
+            빨강 vs 파랑
           </h1>
           <p className="mt-5 max-w-md text-balance text-sm leading-relaxed text-white/80 sm:text-base">
-            지구상 모든 사람이 비밀투표로 파랑이나 빨강을 누른다.
+            지구상 모든 사람이 비밀투표로 빨강이나 파랑을 누른다.
             <br />
             파랑이 절반을 넘으면 <b>전원 생존</b>, 미만이면 <b>빨강만 생존</b>.
             <br />

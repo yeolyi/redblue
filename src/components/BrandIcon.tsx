@@ -1,5 +1,5 @@
 import {
-  siKakao,
+  siKakaotalk,
   siGoogle,
   siApple,
   siGithub,
@@ -7,7 +7,7 @@ import {
 } from "simple-icons/icons";
 
 const ICONS: Record<string, SimpleIcon> = {
-  kakao: siKakao,
+  kakao: siKakaotalk,
   google: siGoogle,
   apple: siApple,
   github: siGithub,
