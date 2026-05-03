@@ -14,7 +14,7 @@ import Footer from "./Footer";
 
 type Choice = "red" | "blue";
 
-export default function VoteScreen({ totalCount }: { totalCount: number }) {
+export default function VoteScreen() {
   const [hover, setHover] = useState<Choice | null>(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -90,16 +90,12 @@ export default function VoteScreen({ totalCount }: { totalCount: number }) {
           <ChoiceCard choice="blue" />
         </div>
 
-        <div className="mt-10 flex items-center gap-4 text-xs text-white/70">
-          <button
-            onClick={signout}
-            className="underline underline-offset-2 hover:text-white cursor-pointer"
-          >
-            로그아웃
-          </button>
-          <span className="text-white/30">·</span>
-          <span>{totalCount.toLocaleString()}명 참여</span>
-        </div>
+        <button
+          onClick={signout}
+          className="mt-10 text-xs text-white/70 underline underline-offset-2 hover:text-white"
+        >
+          로그아웃
+        </button>
 
         <ShareButton className="mt-6" />
 
