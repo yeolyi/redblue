@@ -1,43 +1,51 @@
-# Astro Starter Kit: Minimal
+# redblue
 
-```sh
-npm create astro@latest -- --template minimal
+빨강 vs 파랑 투표 페이지. 결과 공개: **2026-05-18**.
+
+## Stack
+
+- Astro 6 (server output) + React island
+- Tailwind v4
+- Supabase Auth (Kakao / Google / Apple / GitHub) — `yeolyi.com` 인스턴스 공유
+- Vercel 배포 + `vote.yeolyi.com`
+
+## Setup
+
+### 1. yeolyi.com Supabase 사전 설정
+
+**Authentication → Providers** 에서 활성화:
+- Kakao, Google, Apple, GitHub
+- Redirect URL: `https://vote.yeolyi.com/api/auth/callback` (로컬은 `http://localhost:4321/api/auth/callback`)
+
+**Settings → API → Exposed schemas**: `public, redblue` 추가.
+
+**SQL Editor** 에서 `supabase/schema.sql` 실행.
+
+### 2. 로컬
+
+```bash
+cp .env.example .env
+# .env 채우기:
+# PUBLIC_SUPABASE_URL=https://<yeolyi-project>.supabase.co
+# PUBLIC_SUPABASE_ANON_KEY=<anon key>
+# PUBLIC_SITE_URL=http://localhost:4321
+
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### 3. Vercel 배포
 
-## 🚀 Project Structure
+1. Vercel에 import
+2. 환경변수 3개 (위와 동일, `PUBLIC_SITE_URL=https://vote.yeolyi.com`)
+3. `vote.yeolyi.com` 도메인 연결
+4. 모든 OAuth provider Redirect URL을 production URL로 추가
 
-Inside of your Astro project, you'll see the following folders and files:
+## Schema (`redblue`)
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- `votes(user_id pk, choice 'red'|'blue', created_at)` — RLS로 본인 row만 SELECT/INSERT, UPDATE/DELETE 불가
+- `count_votes()` — security definer, 익명 공개
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 출처
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- 영감: [@MrBeast](https://x.com/MrBeast/status/1916501096811450585)
+- 비상업 토이 프로젝트

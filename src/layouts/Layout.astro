@@ -1,0 +1,29 @@
+---
+import "../styles/global.css";
+import { SITE_TITLE, SITE_DESC } from "../lib/constants";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = SITE_TITLE, description = SITE_DESC } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

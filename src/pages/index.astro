@@ -1,17 +1,47 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import LoginCard from "../components/LoginCard.tsx";
+import VoteScreen from "../components/VoteScreen.tsx";
+import ResultScreen from "../components/ResultScreen.tsx";
+import { createSupabaseServerClient } from "../lib/supabase";
 
+const supabase = createSupabaseServerClient(Astro.request, Astro.cookies);
+const {
+  data: { user },
+} = await supabase.auth.getUser();
+
+let myVote: "red" | "blue" | null = null;
+
+if (user) {
+  const { data: voteRow } = await supabase
+    .from("votes")
+    .select("choice")
+    .eq("user_id", user.id)
+    .maybeSingle();
+  if (voteRow) myVote = voteRow.choice as "red" | "blue";
+}
+
+const { data: count } = await supabase.rpc("count_votes");
+const totalCount = typeof count === "number" ? count : 0;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <main class="relative min-h-screen w-full overflow-hidden">
+    {!user && <LoginCard client:load totalCount={totalCount} />}
+    {
+      user && !myVote && (
+        <VoteScreen client:load userEmail={user.email ?? ""} totalCount={totalCount} />
+      )
+    }
+    {
+      user && myVote && (
+        <ResultScreen
+          client:load
+          myVote={myVote}
+          totalCount={totalCount}
+          userEmail={user.email ?? ""}
+        />
+      )
+    }
+  </main>
+</Layout>
