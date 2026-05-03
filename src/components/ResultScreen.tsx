@@ -1,4 +1,5 @@
 import Countdown from "./Countdown";
+import TotalCount from "./TotalCount";
 import Footer from "./Footer";
 
 export default function ResultScreen({
@@ -46,16 +47,15 @@ export default function ResultScreen({
           </h1>
         </div>
 
-        <div className="rounded-2xl bg-white/10 px-8 py-6 ring-1 ring-white/20 backdrop-blur-sm">
-          <p className="mb-4 text-center text-xs font-medium uppercase tracking-[0.2em] text-white/70">
-            5월 18일 오후 6시 결과 공개까지
-          </p>
-          <Countdown />
+        <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center rounded-2xl bg-white/10 px-8 py-6 ring-1 ring-white/20 backdrop-blur-sm">
+            <p className="mb-3 text-center text-xs font-medium uppercase tracking-[0.2em] text-white/70">
+              5월 18일 오후 6시 결과 공개까지
+            </p>
+            <Countdown />
+          </div>
+          <TotalCount value={totalCount} />
         </div>
-
-        <p className="mt-8 text-sm text-white/80">
-          현재 <b>{totalCount.toLocaleString()}</b>명이 결정했습니다
-        </p>
 
         <p className="mt-6 max-w-md text-balance text-center text-xs leading-relaxed text-white/70">
           진행 상황과 결과 공개는{" "}

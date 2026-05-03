@@ -4,7 +4,7 @@ export default function Footer() {
       <p>
         Inspired by{" "}
         <a
-          href="https://x.com/MrBeast/status/1916501096811450585"
+          href="https://x.com/MrBeast/status/2049273335742435617"
           target="_blank"
           rel="noopener noreferrer"
           className="underline underline-offset-2 hover:text-white"

@@ -3,6 +3,7 @@ import { supabaseBrowser } from "../lib/supabase-browser";
 import BrandIcon from "./BrandIcon";
 import SplitBg from "./SplitBg";
 import Countdown from "./Countdown";
+import TotalCount from "./TotalCount";
 import Footer from "./Footer";
 
 type Provider = "kakao" | "google" | "github";
@@ -53,10 +54,7 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
     <>
       <SplitBg />
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-16 text-white">
-        <div className="mb-10 flex flex-col items-center text-center">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-white/70">
-            5월 18일 오후 6시 결과 공개
-          </p>
+        <div className="mb-12 flex flex-col items-center text-center">
           <h1 className="text-balance text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
             빨강 vs 파랑
           </h1>
@@ -69,8 +67,14 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
           </p>
         </div>
 
-        <div className="mb-10">
-          <Countdown />
+        <div className="mb-10 flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center">
+            <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-white/70">
+              5월 18일 오후 6시 결과 공개
+            </p>
+            <Countdown />
+          </div>
+          <TotalCount value={totalCount} />
         </div>
 
         <div className="flex flex-col items-center">
@@ -97,10 +101,6 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
             ))}
           </div>
         </div>
-
-        <p className="mt-10 text-xs text-white/70">
-          현재 <b>{totalCount.toLocaleString()}</b>명 참여
-        </p>
       </div>
       <Footer />
     </>
