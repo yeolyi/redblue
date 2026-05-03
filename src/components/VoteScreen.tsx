@@ -13,13 +13,7 @@ import Footer from "./Footer";
 
 type Choice = "red" | "blue";
 
-export default function VoteScreen({
-  userEmail,
-  totalCount,
-}: {
-  userEmail: string;
-  totalCount: number;
-}) {
+export default function VoteScreen({ totalCount }: { totalCount: number }) {
   const [hover, setHover] = useState<Choice | null>(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -98,8 +92,6 @@ export default function VoteScreen({
         </div>
 
         <div className="mt-10 flex items-center gap-4 text-xs text-white/70">
-          <span>{userEmail}</span>
-          <span className="text-white/30">·</span>
           <button
             onClick={signout}
             className="underline underline-offset-2 hover:text-white cursor-pointer"

@@ -28,19 +28,10 @@ const totalCount = typeof count === "number" ? count : 0;
 <Layout>
   <main class="relative min-h-screen w-full overflow-hidden">
     {!user && <LoginCard client:load totalCount={totalCount} />}
-    {
-      user && !myVote && (
-        <VoteScreen client:load userEmail={user.email ?? ""} totalCount={totalCount} />
-      )
-    }
+    {user && !myVote && <VoteScreen client:load totalCount={totalCount} />}
     {
       user && myVote && (
-        <ResultScreen
-          client:load
-          myVote={myVote}
-          totalCount={totalCount}
-          userEmail={user.email ?? ""}
-        />
+        <ResultScreen client:load myVote={myVote} totalCount={totalCount} />
       )
     }
   </main>

@@ -4,11 +4,9 @@ import Footer from "./Footer";
 export default function ResultScreen({
   myVote,
   totalCount,
-  userEmail,
 }: {
   myVote: "red" | "blue";
   totalCount: number;
-  userEmail: string;
 }) {
   const isRed = myVote === "red";
   const labelKo = isRed ? "빨강" : "파랑";
@@ -63,13 +61,12 @@ export default function ResultScreen({
           현재 <b>{totalCount.toLocaleString()}</b>명이 결정했습니다
         </p>
 
-        <div className="mt-6 flex items-center gap-3 text-xs text-white/70">
-          <span>{userEmail}</span>
-          <span className="text-white/30">·</span>
-          <button onClick={signout} className="underline underline-offset-2 hover:text-white">
-            로그아웃
-          </button>
-        </div>
+        <button
+          onClick={signout}
+          className="mt-6 text-xs text-white/70 underline underline-offset-2 hover:text-white"
+        >
+          로그아웃
+        </button>
       </div>
 
       <Footer />
