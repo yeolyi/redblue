@@ -1,4 +1,13 @@
 import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
+import { Button } from "./ui/button";
 import SplitBg from "./SplitBg";
 import Footer from "./Footer";
 
@@ -41,6 +50,35 @@ export default function VoteScreen({
     window.location.reload();
   }
 
+  const ChoiceCard = ({ choice }: { choice: Choice }) => {
+    const isBlue = choice === "blue";
+    const colorVar = isBlue
+      ? "var(--color-blue-vote)"
+      : "var(--color-red-vote)";
+    const titleKo = isBlue ? "파랑" : "빨강";
+    const subKo = isBlue ? "다 같이 살자에 건다" : "확실히 살아남는다";
+
+    return (
+      <button
+        type="button"
+        disabled={pending}
+        onMouseEnter={() => setHover(choice)}
+        onMouseLeave={() => setHover(null)}
+        onFocus={() => setHover(choice)}
+        onBlur={() => setHover(null)}
+        onClick={() => setConfirm(choice)}
+        className="group flex aspect-square flex-col items-center justify-center rounded-2xl bg-white/10 p-8 text-center backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-white/15 hover:ring-white/40 active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+      >
+        <div
+          className="h-20 w-20 rounded-full shadow-lg ring-4 ring-white/30 transition group-hover:scale-110 sm:h-24 sm:w-24"
+          style={{ background: colorVar }}
+        />
+        <p className="mt-6 text-2xl font-bold">{titleKo}</p>
+        <p className="mt-1 text-xs text-white/70">{subKo}</p>
+      </button>
+    );
+  };
+
   return (
     <>
       <SplitBg highlight={hover} />
@@ -55,84 +93,59 @@ export default function VoteScreen({
         </div>
 
         <div className="grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
-          <button
-            type="button"
-            disabled={pending}
-            onMouseEnter={() => setHover("red")}
-            onMouseLeave={() => setHover(null)}
-            onFocus={() => setHover("red")}
-            onBlur={() => setHover(null)}
-            onClick={() => setConfirm("red")}
-            className="group flex aspect-square flex-col items-center justify-center rounded-2xl bg-white/10 p-8 text-center backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-white/15 hover:ring-white/40 active:scale-[0.98] disabled:opacity-60"
-          >
-            <div className="h-20 w-20 rounded-full bg-[var(--color-red-vote)] shadow-lg ring-4 ring-white/30 transition group-hover:scale-110 sm:h-24 sm:w-24" />
-            <p className="mt-6 text-2xl font-bold">빨강</p>
-            <p className="mt-1 text-xs text-white/70">확실히 살아남는다</p>
-          </button>
-
-          <button
-            type="button"
-            disabled={pending}
-            onMouseEnter={() => setHover("blue")}
-            onMouseLeave={() => setHover(null)}
-            onFocus={() => setHover("blue")}
-            onBlur={() => setHover(null)}
-            onClick={() => setConfirm("blue")}
-            className="group flex aspect-square flex-col items-center justify-center rounded-2xl bg-white/10 p-8 text-center backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-white/15 hover:ring-white/40 active:scale-[0.98] disabled:opacity-60"
-          >
-            <div className="h-20 w-20 rounded-full bg-[var(--color-blue-vote)] shadow-lg ring-4 ring-white/30 transition group-hover:scale-110 sm:h-24 sm:w-24" />
-            <p className="mt-6 text-2xl font-bold">파랑</p>
-            <p className="mt-1 text-xs text-white/70">다 같이 살자에 건다</p>
-          </button>
+          <ChoiceCard choice="blue" />
+          <ChoiceCard choice="red" />
         </div>
 
         <div className="mt-10 flex items-center gap-4 text-xs text-white/70">
           <span>{userEmail}</span>
           <span className="text-white/30">·</span>
-          <button onClick={signout} className="underline underline-offset-2 hover:text-white">
+          <button
+            onClick={signout}
+            className="underline underline-offset-2 hover:text-white cursor-pointer"
+          >
             로그아웃
           </button>
           <span className="text-white/30">·</span>
           <span>{totalCount.toLocaleString()}명 참여</span>
         </div>
 
-        {error && (
-          <p className="mt-6 text-sm text-red-200">⚠ {error}</p>
-        )}
+        {error && <p className="mt-6 text-sm text-red-200">⚠ {error}</p>}
       </div>
 
-      {confirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm">
-          <div className="w-full max-w-sm rounded-2xl bg-white p-6 text-black shadow-xl">
-            <h2 className="text-lg font-bold">
-              {confirm === "red" ? "빨강" : "파랑"}을 누르시겠습니까?
-            </h2>
-            <p className="mt-2 text-sm text-black/70">
-              한 번 누르면 변경할 수 없습니다. 5월 18일 결과 공개까지 유지됩니다.
-            </p>
-            <div className="mt-5 flex gap-2">
-              <button
-                onClick={() => setConfirm(null)}
-                disabled={pending}
-                className="flex-1 rounded-lg border border-black/10 py-2.5 text-sm font-medium hover:bg-black/5"
-              >
-                취소
-              </button>
-              <button
-                onClick={() => submit(confirm)}
-                disabled={pending}
-                className={`flex-1 rounded-lg py-2.5 text-sm font-semibold text-white ${
-                  confirm === "red"
-                    ? "bg-[var(--color-red-vote)] hover:brightness-95"
-                    : "bg-[var(--color-blue-vote)] hover:brightness-95"
-                } disabled:opacity-60`}
-              >
-                {pending ? "전송 중…" : "확정"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <Dialog open={confirm !== null} onOpenChange={(o) => !o && setConfirm(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {confirm === "blue" ? "파랑" : "빨강"}을 누르시겠습니까?
+            </DialogTitle>
+            <DialogDescription>
+              한 번 누르면 변경할 수 없습니다. 5월 18일 오후 6시 결과 공개까지
+              유지됩니다.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2 sm:gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setConfirm(null)}
+              disabled={pending}
+            >
+              취소
+            </Button>
+            <Button
+              onClick={() => confirm && submit(confirm)}
+              disabled={pending}
+              className={
+                confirm === "blue"
+                  ? "bg-[var(--color-blue-vote)] text-white hover:bg-[var(--color-blue-vote-deep)]"
+                  : "bg-[var(--color-red-vote)] text-white hover:bg-[var(--color-red-vote-deep)]"
+              }
+            >
+              {pending ? "전송 중…" : "확정"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </>

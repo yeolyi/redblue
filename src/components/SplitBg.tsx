@@ -17,8 +17,8 @@ export default function SplitBg({ intensity = 1, highlight = null }: Props) {
           style={
             {
               background:
-                "linear-gradient(135deg, var(--color-red-vote-deep), var(--color-red-vote))",
-              opacity: redOpacity,
+                "linear-gradient(135deg, var(--color-blue-vote-deep), var(--color-blue-vote))",
+              opacity: blueOpacity,
             } as CSSProperties
           }
         />
@@ -27,8 +27,8 @@ export default function SplitBg({ intensity = 1, highlight = null }: Props) {
           style={
             {
               background:
-                "linear-gradient(225deg, var(--color-blue-vote-deep), var(--color-blue-vote))",
-              opacity: blueOpacity,
+                "linear-gradient(225deg, var(--color-red-vote-deep), var(--color-red-vote))",
+              opacity: redOpacity,
             } as CSSProperties
           }
         />

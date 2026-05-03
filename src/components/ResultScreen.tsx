@@ -54,7 +54,7 @@ export default function ResultScreen({
 
         <div className="rounded-2xl bg-white/10 px-8 py-6 ring-1 ring-white/20 backdrop-blur-sm">
           <p className="mb-4 text-center text-xs font-medium uppercase tracking-[0.2em] text-white/70">
-            결과 공개까지
+            5월 18일 오후 6시 결과 공개까지
           </p>
           <Countdown />
         </div>
