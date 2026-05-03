@@ -9,6 +9,7 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import SplitBg from "./SplitBg";
+import ShareButton from "./ShareButton";
 import Footer from "./Footer";
 
 type Choice = "red" | "blue";
@@ -99,6 +100,8 @@ export default function VoteScreen({ totalCount }: { totalCount: number }) {
           <span className="text-white/30">·</span>
           <span>{totalCount.toLocaleString()}명 참여</span>
         </div>
+
+        <ShareButton className="mt-6" />
 
         {error && <p className="mt-6 text-sm text-red-200">⚠ {error}</p>}
       </div>

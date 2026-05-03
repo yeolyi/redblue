@@ -1,5 +1,6 @@
 import Countdown from "./Countdown";
 import TotalCount from "./TotalCount";
+import ShareButton from "./ShareButton";
 import Footer from "./Footer";
 
 export default function ResultScreen({
@@ -69,6 +70,8 @@ export default function ResultScreen({
           </a>
           {" "}인스타그램에서 안내됩니다.
         </p>
+
+        <ShareButton className="mt-6" />
 
         <button
           onClick={signout}

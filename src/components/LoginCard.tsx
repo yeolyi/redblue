@@ -4,6 +4,7 @@ import BrandIcon from "./BrandIcon";
 import SplitBg from "./SplitBg";
 import Countdown from "./Countdown";
 import TotalCount from "./TotalCount";
+import ShareButton from "./ShareButton";
 import Footer from "./Footer";
 
 type Provider = "kakao" | "google" | "github";
@@ -101,6 +102,8 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
             ))}
           </div>
         </div>
+
+        <ShareButton className="mt-8" />
       </div>
       <Footer />
     </>
