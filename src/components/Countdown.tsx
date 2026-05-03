@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
+import NumberFlow from "@number-flow/react";
 import { REVEAL_DATE } from "../lib/constants";
 
-function diff(target: Date) {
-  const now = Date.now();
-  const t = target.getTime() - now;
-  if (t <= 0) return { d: 0, h: 0, m: 0, s: 0, done: true };
-  const d = Math.floor(t / 86_400_000);
-  const h = Math.floor((t % 86_400_000) / 3_600_000);
-  const m = Math.floor((t % 3_600_000) / 60_000);
-  const s = Math.floor((t % 60_000) / 1000);
-  return { d, h, m, s, done: false };
+function getDiff() {
+  const ms = REVEAL_DATE.getTime() - Date.now();
+  if (ms <= 0) return null;
+  return {
+    days: Math.floor(ms / 86400000),
+    hours: Math.floor((ms % 86400000) / 3600000),
+    minutes: Math.floor((ms % 3600000) / 60000),
+    seconds: Math.floor((ms % 60000) / 1000),
+  };
 }
 
 export default function Countdown() {
-  const [time, setTime] = useState(() => diff(REVEAL_DATE));
+  const [diff, setDiff] = useState(getDiff);
 
   useEffect(() => {
-    const id = setInterval(() => setTime(diff(REVEAL_DATE)), 1000);
+    const id = setInterval(() => setDiff(getDiff()), 1000);
     return () => clearInterval(id);
   }, []);
 
-  if (time.done) {
+  if (!diff) {
     return (
       <p className="text-sm font-medium tracking-wide text-white/80">
         결과가 공개됐습니다
@@ -28,26 +29,25 @@ export default function Countdown() {
     );
   }
 
-  const cell = (n: number, label: string) => (
-    <div className="flex flex-col items-center">
-      <span className="font-mono text-3xl font-semibold tabular-nums sm:text-4xl">
-        {String(n).padStart(2, "0")}
-      </span>
-      <span className="mt-1 text-[10px] uppercase tracking-widest text-white/60 sm:text-xs">
-        {label}
-      </span>
+  return (
+    <div className="flex items-baseline justify-center gap-5 sm:gap-7">
+      <Unit value={diff.days} label="일" />
+      <Unit value={diff.hours} label="시간" />
+      <Unit value={diff.minutes} label="분" />
+      <Unit value={diff.seconds} label="초" />
     </div>
   );
+}
 
+function Unit({ value, label }: { value: number; label: string }) {
   return (
-    <div className="flex items-center gap-4 text-white sm:gap-6">
-      {cell(time.d, "DAYS")}
-      <span className="text-2xl text-white/40">:</span>
-      {cell(time.h, "HOURS")}
-      <span className="text-2xl text-white/40">:</span>
-      {cell(time.m, "MIN")}
-      <span className="text-2xl text-white/40">:</span>
-      {cell(time.s, "SEC")}
+    <div className="flex items-baseline gap-1.5">
+      <NumberFlow
+        value={value}
+        format={{ minimumIntegerDigits: 2 }}
+        className="font-mono text-3xl font-extralight tabular-nums text-white sm:text-4xl"
+      />
+      <span className="text-xs text-white/70 sm:text-sm">{label}</span>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { supabaseBrowser } from "../lib/supabase-browser";
-import { Button } from "./ui/button";
 import BrandIcon from "./BrandIcon";
 import SplitBg from "./SplitBg";
 import Countdown from "./Countdown";
@@ -12,22 +11,25 @@ const PROVIDERS: {
   id: Provider;
   label: string;
   className: string;
+  iconClassName: string;
 }[] = [
   {
     id: "kakao",
-    label: "카카오로 시작하기",
-    className: "bg-[#FEE500] text-black hover:bg-[#FEE500]/90",
+    label: "카카오로 로그인",
+    className: "bg-[#FEE500] hover:bg-[#FEE500]/90",
+    iconClassName: "h-7 w-7 text-black",
   },
   {
     id: "google",
-    label: "Google로 시작하기",
-    className:
-      "bg-white text-black border border-black/10 hover:bg-white/90",
+    label: "Google로 로그인",
+    className: "bg-white hover:bg-white/90 border border-black/10",
+    iconClassName: "h-7 w-7",
   },
   {
     id: "github",
-    label: "GitHub로 시작하기",
-    className: "bg-[#1f2328] text-white hover:bg-[#1f2328]/90",
+    label: "GitHub로 로그인",
+    className: "bg-[#1f2328] hover:bg-[#1f2328]/90",
+    iconClassName: "h-6 w-6 text-white",
   },
 ];
 
@@ -51,7 +53,7 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
     <>
       <SplitBg />
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-16 text-white">
-        <div className="mb-8 flex flex-col items-center text-center">
+        <div className="mb-10 flex flex-col items-center text-center">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-white/70">
             5월 18일 오후 6시 결과 공개
           </p>
@@ -71,23 +73,27 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
           <Countdown />
         </div>
 
-        <div className="w-full max-w-sm space-y-2.5">
+        <div className="flex items-center gap-4">
           {PROVIDERS.map((p) => (
-            <Button
+            <button
               key={p.id}
               type="button"
-              size="lg"
+              aria-label={p.label}
+              title={p.label}
               disabled={pending !== null}
               onClick={() => login(p.id)}
-              className={`h-12 w-full justify-center gap-3 text-sm font-semibold shadow-sm transition active:scale-[0.98] ${p.className}`}
+              className={`flex h-14 w-14 items-center justify-center rounded-full shadow-md transition active:scale-[0.95] disabled:opacity-60 ${p.className}`}
             >
-              <BrandIcon brand={p.id} className="h-5 w-5" />
-              {pending === p.id ? "이동 중…" : p.label}
-            </Button>
+              {pending === p.id ? (
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+              ) : (
+                <BrandIcon brand={p.id} className={p.iconClassName} />
+              )}
+            </button>
           ))}
         </div>
 
-        <p className="mt-8 text-xs text-white/70">
+        <p className="mt-10 text-xs text-white/70">
           현재 <b>{totalCount.toLocaleString()}</b>명 참여
         </p>
       </div>
