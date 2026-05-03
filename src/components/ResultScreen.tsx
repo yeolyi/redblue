@@ -10,9 +10,6 @@ export default function ResultScreen({
 }) {
   const isRed = myVote === "red";
   const labelKo = isRed ? "빨강" : "파랑";
-  const subtitle = isRed
-    ? "확실히 살아남는 쪽"
-    : "다 같이 살자는 쪽";
 
   async function signout() {
     await fetch("/api/auth/signout", { method: "POST" });
@@ -47,7 +44,6 @@ export default function ResultScreen({
           <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl">
             당신은 {labelKo}을 골랐습니다
           </h1>
-          <p className="mt-3 text-sm text-white/80 sm:text-base">{subtitle}</p>
         </div>
 
         <div className="rounded-2xl bg-white/10 px-8 py-6 ring-1 ring-white/20 backdrop-blur-sm">

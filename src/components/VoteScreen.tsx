@@ -50,7 +50,6 @@ export default function VoteScreen({ totalCount }: { totalCount: number }) {
       ? "var(--color-blue-vote)"
       : "var(--color-red-vote)";
     const titleKo = isBlue ? "파랑" : "빨강";
-    const subKo = isBlue ? "다 같이 살자에 건다" : "확실히 살아남는다";
 
     return (
       <button
@@ -68,7 +67,6 @@ export default function VoteScreen({ totalCount }: { totalCount: number }) {
           style={{ background: colorVar }}
         />
         <p className="mt-6 text-2xl font-bold">{titleKo}</p>
-        <p className="mt-1 text-xs text-white/70">{subKo}</p>
       </button>
     );
   };
