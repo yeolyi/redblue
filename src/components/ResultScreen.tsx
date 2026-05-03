@@ -59,7 +59,6 @@ export default function ResultScreen({
         </div>
 
         <p className="mt-6 max-w-md text-balance text-center text-xs leading-relaxed text-white/70">
-          진행 상황과 결과 공개는{" "}
           <a
             href="https://instagram.com/yeol.dev"
             target="_blank"
@@ -68,7 +67,7 @@ export default function ResultScreen({
           >
             @yeol.dev
           </a>
-          {" "}인스타그램에서 안내됩니다.
+          {" "}인스타그램에서 진행 상황을 공유받아보세요.
         </p>
 
         <ShareButton className="mt-6" />
