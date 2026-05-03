@@ -116,7 +116,7 @@ export default function VoteScreen() {
               {confirm === "blue" ? "파랑" : "빨강"}을 누르시겠습니까?
             </DialogTitle>
             <DialogDescription>
-              한 번 누르면 변경할 수 없습니다. 5월 18일 오후 6시 결과 공개까지
+              한 번 누르면 변경할 수 없습니다. 5월 11일 오후 6시 결과 공개까지
               유지됩니다.
             </DialogDescription>
           </DialogHeader>

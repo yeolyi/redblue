@@ -71,7 +71,7 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
         <div className="mb-10 flex flex-col items-center gap-6">
           <div className="flex flex-col items-center">
             <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-white/70">
-              5월 18일 오후 6시 결과 공개
+              5월 11일 오후 6시 결과 공개
             </p>
             <Countdown />
           </div>
