@@ -57,6 +57,19 @@ export default function ResultScreen({
           현재 <b>{totalCount.toLocaleString()}</b>명이 결정했습니다
         </p>
 
+        <p className="mt-6 max-w-md text-balance text-center text-xs leading-relaxed text-white/70">
+          진행 상황과 결과 공개는{" "}
+          <a
+            href="https://instagram.com/yeol.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-white underline underline-offset-2"
+          >
+            @yeol.dev
+          </a>
+          {" "}인스타그램에서 안내됩니다.
+        </p>
+
         <button
           onClick={signout}
           className="mt-6 text-xs text-white/70 underline underline-offset-2 hover:text-white"

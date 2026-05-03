@@ -11,14 +11,14 @@ export default function Footer() {
         >
           @MrBeast
         </a>
-        {" · "}© 2026{" "}
+        {" · "}made by{" "}
         <a
-          href="https://yeolyi.com"
+          href="https://instagram.com/yeol.dev"
           target="_blank"
           rel="noopener noreferrer"
           className="underline underline-offset-2 hover:text-white"
         >
-          yeolyi.com
+          @yeol.dev
         </a>
       </p>
     </footer>
