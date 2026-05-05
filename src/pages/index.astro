@@ -28,6 +28,11 @@ const totalCount = typeof count === "number" ? count : 0;
 <Layout>
   <main class="relative min-h-screen w-full overflow-hidden">
     {!user && <LoginCard client:load totalCount={totalCount} />}
+    {user && import.meta.env.DEV && (
+      <script define:vars={{ uid: user.id }} is:inline>
+        console.log("user_id:", uid);
+      </script>
+    )}
     {user && !myVote && <VoteScreen client:load totalCount={totalCount} />}
     {user && myVote && <ResultScreen client:load myVote={myVote} totalCount={totalCount} />}
   </main>

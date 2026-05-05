@@ -78,7 +78,7 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
 
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerContent
-          className="mx-auto bg-[url('/login-plate.webp')] bg-[length:100%_auto] bg-top bg-no-repeat border-0 max-w-none w-[min(100%,calc(100svh*3/4))] aspect-[1137/1383] mt-0 max-h-none rounded-none"
+          className="mx-auto bg-[url('/login-plate.webp')] bg-[length:100%_auto] bg-top bg-no-repeat border-0 max-w-none w-[min(100%,calc(100svh*3/4))] aspect-[1130/1392] mt-0 max-h-none rounded-none"
         >
           <DrawerTitle className="sr-only">신원 확인이 필요합니다</DrawerTitle>
           <DrawerDescription className="sr-only">
@@ -87,7 +87,7 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
           </DrawerDescription>
           <div className="relative h-full w-full">
             <div
-              className="absolute left-1/2 top-[59.60%] flex w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+              className="absolute left-1/2 top-[58%] flex w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center"
               style={{ gap: "7.10%" }}
             >
               {PROVIDERS.map((p) => (
@@ -98,7 +98,7 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
                   title={p.label}
                   disabled={pending !== null}
                   onClick={() => login(p.id)}
-                  style={{ width: "17.40%" }}
+                  style={{ width: "14%" }}
                   className={`flex aspect-square items-center justify-center rounded-full shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.3),0_2px_6px_rgba(0,0,0,0.4)] mix-blend-luminosity opacity-80 saturate-50 transition hover:opacity-100 hover:mix-blend-normal hover:saturate-100 active:scale-[0.95] disabled:opacity-60 cursor-pointer ${p.className}`}
                 >
                   <BrandIcon brand={p.id} className={p.iconClassName} />
