@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabaseBrowser } from "../lib/supabase-browser";
 import {
   Drawer,
@@ -50,6 +50,14 @@ export default function LoginCard({
   const [errorMsg, setErrorMsg] = useState<string | null>(
     authError ? humanizeAuthError(authError) : null,
   );
+
+  useEffect(() => {
+    function onShow(e: PageTransitionEvent) {
+      if (e.persisted) setPending(null);
+    }
+    window.addEventListener("pageshow", onShow);
+    return () => window.removeEventListener("pageshow", onShow);
+  }, []);
 
   async function login(provider: Provider) {
     setPending(provider);
