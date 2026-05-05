@@ -33,7 +33,7 @@ export default function Board({
       }}
     >
       <img
-        src="/board.png"
+        src="/board.webp"
         alt="당신을 포함한 전 인류는 지금 하나의 버튼을 선택해야 합니다"
         className="block h-full w-full select-none"
         draggable={false}

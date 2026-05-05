@@ -21,6 +21,8 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
+  background: #000;
+  color: #fff;
 }
 
 /* 삼체 카운트다운 스타일 위글: 각 글자가 미세하게 떨림 */
@@ -56,12 +58,6 @@ body {
   mix-blend-mode: multiply;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #0a0a0a;
-    color: #fafafa;
-  }
-}
 
 @theme inline {
   --font-heading: var(--font-sans);

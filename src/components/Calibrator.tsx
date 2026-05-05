@@ -88,7 +88,7 @@ export default function Calibrator() {
         style={{ aspectRatio: "3 / 4" }}
       >
         <img
-          src="/board.png"
+          src="/board.webp"
           alt="board"
           className="block h-full w-full select-none"
           draggable={false}

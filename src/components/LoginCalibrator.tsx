@@ -30,7 +30,7 @@ export default function LoginCalibrator() {
         style={{ aspectRatio: "1137 / 1383" }}
       >
         <img
-          src="/login-plate.png"
+          src="/login-plate.webp"
           alt="login plate"
           className="block h-full w-full select-none"
           draggable={false}

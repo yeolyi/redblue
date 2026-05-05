@@ -78,7 +78,7 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
 
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerContent
-          className="mx-auto bg-[url('/login-plate.png')] bg-[length:100%_auto] bg-top bg-no-repeat border-0 max-w-none w-[min(100%,calc(100svh*3/4))] aspect-[1137/1383] mt-0 max-h-none rounded-none"
+          className="mx-auto bg-[url('/login-plate.webp')] bg-[length:100%_auto] bg-top bg-no-repeat border-0 max-w-none w-[min(100%,calc(100svh*3/4))] aspect-[1137/1383] mt-0 max-h-none rounded-none"
         >
           <DrawerTitle className="sr-only">신원 확인이 필요합니다</DrawerTitle>
           <DrawerDescription className="sr-only">
