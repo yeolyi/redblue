@@ -36,7 +36,15 @@ export default function VoteScreen({ totalCount }: { totalCount: number }) {
   }
 
   return (
-    <div className="relative z-10 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-black text-white">
+    <div
+      className="relative z-10 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-black text-white"
+      style={{
+        paddingTop: "env(safe-area-inset-top)",
+        paddingBottom: "env(safe-area-inset-bottom)",
+        paddingLeft: "env(safe-area-inset-left)",
+        paddingRight: "env(safe-area-inset-right)",
+      }}
+    >
       <Board
         onChoice={submit}
         disabled={pending}

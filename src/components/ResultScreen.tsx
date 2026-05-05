@@ -22,7 +22,15 @@ export default function ResultScreen({
   }
 
   return (
-    <div className="relative z-10 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-black text-white">
+    <div
+      className="relative z-10 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-black text-white"
+      style={{
+        paddingTop: "env(safe-area-inset-top)",
+        paddingBottom: "env(safe-area-inset-bottom)",
+        paddingLeft: "env(safe-area-inset-left)",
+        paddingRight: "env(safe-area-inset-right)",
+      }}
+    >
       <div
         className="relative mx-auto"
         style={{
@@ -36,8 +44,7 @@ export default function ResultScreen({
           className="block h-full w-full select-none"
           draggable={false}
           loading="eager"
-          // @ts-expect-error fetchpriority is valid HTML5
-          fetchpriority="high"
+          fetchPriority="high"
         />
 
         {/* 선택한 버튼을 강조 */}

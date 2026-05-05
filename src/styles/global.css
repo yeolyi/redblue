@@ -25,6 +25,14 @@ body {
   color: #fff;
 }
 
+/* vaul drawer: 기본 부드러운 spring → 짧고 단단한 ease 로 변경 */
+[data-vaul-drawer] {
+  transition: transform 220ms cubic-bezier(0.7, 0, 0.2, 1) !important;
+}
+[data-vaul-overlay] {
+  transition-duration: 180ms !important;
+}
+
 /* 삼체 카운트다운 스타일 위글: 각 글자가 미세하게 떨림 */
 @keyframes wiggle {
   0%   { transform: translate(0, 0) rotate(0deg); }

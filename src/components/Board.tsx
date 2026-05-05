@@ -38,8 +38,7 @@ export default function Board({
         className="block h-full w-full select-none"
         draggable={false}
         loading="eager"
-        // @ts-expect-error fetchpriority is valid HTML5
-        fetchpriority="high"
+        fetchPriority="high"
       />
       {(["red", "blue"] as Choice[]).map((choice) => {
         const pos = BUTTONS[choice];
