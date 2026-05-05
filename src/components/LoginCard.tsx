@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { supabaseBrowser } from "../lib/supabase-browser";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from "./ui/drawer";
 import BrandIcon from "./BrandIcon";
-import SplitBg from "./SplitBg";
-import Countdown from "./Countdown";
-import TotalCount from "./TotalCount";
-import ShareButton from "./ShareButton";
-import Footer from "./Footer";
+import Board from "./Board";
+import CountdownNeon from "./CountdownNeon";
+import BoardCredits from "./BoardCredits";
+import Wiggle from "./Wiggle";
 
 type Provider = "kakao" | "google" | "github";
 
@@ -19,24 +25,25 @@ const PROVIDERS: {
     id: "kakao",
     label: "카카오로 로그인",
     className: "bg-[#FEE500] hover:bg-[#FEE500]/90",
-    iconClassName: "h-5 w-5 text-black",
+    iconClassName: "h-[40%] w-[40%] text-black",
   },
   {
     id: "google",
     label: "Google로 로그인",
     className: "bg-white hover:bg-white/90 border border-black/10",
-    iconClassName: "h-5 w-5",
+    iconClassName: "h-[40%] w-[40%]",
   },
   {
     id: "github",
     label: "GitHub로 로그인",
     className: "bg-[#1f2328] hover:bg-[#1f2328]/90",
-    iconClassName: "h-[18px] w-[18px] text-white",
+    iconClassName: "h-[40%] w-[40%] text-white",
   },
 ];
 
 export default function LoginCard({ totalCount }: { totalCount: number }) {
   const [pending, setPending] = useState<Provider | null>(null);
+  const [open, setOpen] = useState(false);
 
   async function login(provider: Provider) {
     setPending(provider);
@@ -53,59 +60,55 @@ export default function LoginCard({ totalCount }: { totalCount: number }) {
 
   return (
     <>
-      <SplitBg />
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-16 text-white">
-        <div className="mb-12 flex flex-col items-center text-center">
-          <h1 className="text-balance text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-            빨강 vs 파랑
-          </h1>
-          <p className="mt-5 max-w-md text-balance text-sm leading-relaxed text-white/80 sm:text-base">
-            지구상 모든 사람이 비밀투표로 빨강이나 파랑을 누른다.
-            <br />
-            파랑이 절반을 넘으면 <b>전원 생존</b>, 미만이면 <b>빨강만 생존</b>.
-            <br />
-            당신은 어느 쪽을 누르겠습니까?
-          </p>
-        </div>
-
-        <div className="mb-10 flex flex-col items-center gap-6">
-          <div className="flex flex-col items-center">
-            <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-white/70">
-              5월 11일 오후 6시 결과 공개
-            </p>
-            <Countdown />
-          </div>
-          <TotalCount value={totalCount} />
-        </div>
-
-        <div className="flex flex-col items-center">
-          <p className="mb-3 text-xs font-medium text-white/70">
-            로그인 후 투표하기
-          </p>
-          <div className="flex items-center gap-3">
-            {PROVIDERS.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                aria-label={p.label}
-                title={p.label}
-                disabled={pending !== null}
-                onClick={() => login(p.id)}
-                className={`flex h-11 w-11 items-center justify-center rounded-full shadow-md transition active:scale-[0.95] disabled:opacity-60 ${p.className}`}
-              >
-                {pending === p.id ? (
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                ) : (
-                  <BrandIcon brand={p.id} className={p.iconClassName} />
-                )}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <ShareButton className="mt-8" />
+      <div className="relative z-10 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-black text-white">
+        <Board
+          onChoice={() => setOpen(true)}
+          disabled={pending !== null}
+          topRight={
+            <>
+              <CountdownNeon />
+              <span className="text-xl font-light tabular-nums tracking-wider text-amber-300 [text-shadow:0_0_4px_rgba(255,200,80,0.9),0_0_10px_rgba(245,166,35,0.7),0_0_20px_rgba(245,140,30,0.5)] sm:text-2xl">
+                <Wiggle>{`${totalCount}명`}</Wiggle>
+              </span>
+            </>
+          }
+          bottomRight={<BoardCredits />}
+        />
       </div>
-      <Footer />
+
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerContent
+          className="mx-auto bg-[url('/login-plate.png')] bg-[length:100%_auto] bg-top bg-no-repeat border-0 max-w-none w-[min(100%,calc(100svh*3/4))] aspect-[1137/1383] mt-0 max-h-none rounded-none"
+        >
+          <DrawerTitle className="sr-only">신원 확인이 필요합니다</DrawerTitle>
+          <DrawerDescription className="sr-only">
+            이 결정은 당신의 이름으로 영구 기록됩니다. 로그인 후 다시 버튼을
+            눌러주세요.
+          </DrawerDescription>
+          <div className="relative h-full w-full">
+            <div
+              className="absolute left-1/2 top-[59.60%] flex w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+              style={{ gap: "7.10%" }}
+            >
+              {PROVIDERS.map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  aria-label={p.label}
+                  title={p.label}
+                  disabled={pending !== null}
+                  onClick={() => login(p.id)}
+                  style={{ width: "17.40%" }}
+                  className={`flex aspect-square items-center justify-center rounded-full shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.3),0_2px_6px_rgba(0,0,0,0.4)] mix-blend-luminosity opacity-80 saturate-50 transition hover:opacity-100 hover:mix-blend-normal hover:saturate-100 active:scale-[0.95] disabled:opacity-60 cursor-pointer ${p.className}`}
+                >
+                  <BrandIcon brand={p.id} className={p.iconClassName} />
+                </button>
+              ))}
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
+
     </>
   );
 }

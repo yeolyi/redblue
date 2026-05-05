@@ -50,7 +50,7 @@ export default function ShareButton({
       type="button"
       onClick={share}
       aria-label="공유"
-      className={`inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-white/20 active:scale-[0.98] ${className}`}
+      className={`inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-black/30 px-3 py-1.5 font-mono text-[11px] tracking-wider text-amber-300 backdrop-blur-sm transition [text-shadow:0_0_4px_rgba(245,166,35,0.6)] hover:border-amber-300/70 hover:bg-black/50 active:scale-[0.98] sm:text-xs ${className}`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
