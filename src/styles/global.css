@@ -23,6 +23,9 @@ body {
   -webkit-tap-highlight-color: transparent;
   background: #000;
   color: #fff;
+  overflow: hidden;
+  overscroll-behavior: none;
+  height: 100%;
 }
 
 /* vaul drawer: 기본 부드러운 spring → 짧고 단단한 ease 로 변경 */
