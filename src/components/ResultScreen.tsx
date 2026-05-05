@@ -35,6 +35,9 @@ export default function ResultScreen({
           alt="당신을 포함한 전 인류는 지금 하나의 버튼을 선택해야 합니다"
           className="block h-full w-full select-none"
           draggable={false}
+          loading="eager"
+          // @ts-expect-error fetchpriority is valid HTML5
+          fetchpriority="high"
         />
 
         {/* 선택한 버튼을 강조 */}
